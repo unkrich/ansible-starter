@@ -37,6 +37,6 @@
   when: github_orgs is defined
 
 - name: Pull GitHub organization repos
-  shell: '/opt/homebrew/bin/gh repo list {{ item }} --no-archived --json=sshUrl --limit 1000 -q ".[].sshUrl" | xargs -n1 echo | xargs -I {} bash -c "cd ~/Developer/{{item}} && git clone "{}""'
+  shell: '/opt/homebrew/bin/gh repo list {{ item }} --no-archived --json=sshUrl --limit 1000 -q ".[].sshUrl" | xargs -n1 echo | xargs -I {} bash -c "cd ~/Developer/{{ item }} && git clone "{}" || (cd ~/Developer/{{ item }}"{}" ; git pull)"'
   loop: "{{ github_orgs }}"
   when: github_orgs is defined
