@@ -1,0 +1,39 @@
+- name: Ensuring Homebrew Is Installed
+  stat:
+    path: /opt/homebrew/bin/dockutil
+  register: dockutil_check
+  tags:
+    - dockutil
+    - macos
+
+- name: Installing Dockutil
+  when:
+    - not dockutil_check.stat.exists
+  homebrew:
+    name: "dockutil"
+    state: present
+  tags:
+    - dockutil
+    - macos
+
+- name: Dockutil | Remove all dock items
+  shell: /opt/homebrew/bin/dockutil --remove all --no-restart
+  tags:
+    - dockutil
+    - macos
+
+- name: Dockutil | Adding items
+  shell: /opt/homebrew/bin/dockutil --add '{{ item.path }}' --position {{ item.pos }} --no-restart
+  with_items: "{{ dockitems_to_persist }}"
+  loop_control:
+    label: "{{item}}"
+  tags:
+    - dockutil
+    - macos
+
+- name: Restart Dock
+  shell: killall Dock
+  changed_when: false
+  tags:
+    - dockutil
+    - macos

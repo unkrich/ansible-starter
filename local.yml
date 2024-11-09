@@ -1,5 +1,61 @@
 - hosts: localhost
+  vars_files:
+    - vars/secrets.yml
   vars:
-    personal: "{{ lookup('env', 'HOME') }}/Developer/unkrich"
+    source_key: "./.ssh/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    personal: "{{ lookup('env', 'HOME') }}/Developer/{{ lookup('env', 'USER') }}"
+    github_orgs:
+      - unkrich
+      - superpowerdotcom
+    brew_cask_packages:
+      - arc
+    brew_packages:
+      - direnv
+    dockitems_to_persist:
+      - name: Messages
+        path: "/Applications/Messages.app"
+        pos: 1
+      # - name: Arc
+      #   path: "/Applications/Arc.app"
+      #   pos: 1
+      # - name: Messages
+      #   path: "/Applications/Messages.app"
+      #   pos: 2
+      # - name: Slack
+      #   path: "/Applications/Slack.app"
+      #   pos: 3
+      # - name: Discord
+      #   path: "/Applications/Discord.app"
+      #   pos: 4
+      # - name: Notion Calendar
+      #   path: "/Applications/Notion\ Calendar.app"
+      #   pos: 5
+      # - name: Superhuman
+      #   path: "/Applications/Superhuman.app"
+      #   pos: 6
+      # - name: Notion
+      #   path: "/Applications/Notion.app"
+      #   pos: 7
+      # - name: Linear
+      #   path: "/Applications/Linear.app"
+      #   pos: 8
+      # - name: iTerm
+      #   path: "/Applications/iTerm.app"
+      #   pos: 9
+      # - name: System Settings
+      #   path: "/Applications/System Settings.app"
+      #   pos: 10
+    install_homebrew_if_missing: true
+    upgrade_homebrew_packages: false
   tasks:
-    - include: tasks/zsh-setup.yml
+    - include: tasks/dev/zsh.yml
+    - include: tasks/dev/ssh.yml
+    - include: tasks/dev/git.yml
+    - include: tasks/brew-setup.yml
+    - include: tasks/osx-defaults/core.yml
+    - include: tasks/osx-defaults/dock.yml
+    - include: tasks/osx-defaults/finder.yml
+    - include: tasks/osx-defaults/keyboard.yml
+    - include: tasks/osx-defaults/spotlight.yml
+    - include: tasks/osx-defaults/dockutil.yml

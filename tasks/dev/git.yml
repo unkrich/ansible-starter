@@ -1,0 +1,42 @@
+- name: Ensuring gh Is Installed
+  stat:
+    path: /opt/homebrew/bin/gh
+  register: gh_check
+  tags:
+    - gh
+    - macos
+
+- name: Installing gh
+  when:
+    - not gh_check.stat.exists
+  homebrew:
+    name: "gh"
+    state: present
+  tags:
+    - gh
+    - macos
+
+- name: Set gh to SSL
+  shell: /opt/homebrew/bin/gh config set -h github.com git_protocol ssh
+  tags:
+    - gh
+    - macos
+
+- name: Authenticate gh with token
+  shell: echo {{ gh_token }} | /opt/homebrew/bin/gh auth login --with-token
+  tags:
+    - gh
+    - macos
+
+- name: Create Developer directory
+  shell: mkdir -p ~/Developer
+
+- name: Create GitHub organization dirs
+  shell: "mkdir -p ~/Developer/{{ item }}"
+  loop: "{{ github_orgs }}"
+  when: github_orgs is defined
+
+- name: Pull GitHub organization repos
+  shell: '/opt/homebrew/bin/gh repo list {{ item }} --no-archived --json=sshUrl --limit 1000 -q ".[].sshUrl" | xargs -n1 echo | xargs -I {} bash -c "cd ~/Developer/{{item}} && git clone "{}""'
+  loop: "{{ github_orgs }}"
+  when: github_orgs is defined

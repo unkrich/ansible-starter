@@ -1,0 +1,65 @@
+- name: Ensuring Homebrew Is Installed
+  stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew_check_initial
+  tags:
+    - homebrew
+    - brew
+    - install
+    - macos
+
+- name: Installing Homebrew
+  shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  when:
+    - not homebrew_check_initial.stat.exists
+  tags:
+    - homebrew
+    - brew
+    - install
+    - macos
+
+- name: Ensuring Homebrew Is Installed
+  stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew_check
+  tags:
+    - homebrew
+    - brew
+    - install
+    - macos
+
+- name: Updating Homebrew
+  homebrew:
+    update_homebrew: true
+  when: homebrew_check.stat.exists
+
+- name: Upgrading Homebrew Packages
+  homebrew:
+    upgrade_all: "{{ upgrade_homebrew_packages }}"
+  register: result
+  until: result is successful
+  when: upgrade_homebrew_packages is defined and homebrew_check.stat.exists
+
+- name: Installing Homebrew Taps
+  homebrew_tap:
+    name: "{{ brew_taps }}"
+    state: present
+  register: result
+  until: result is successful
+  when: brew_taps is defined and homebrew_check.stat.exists
+
+- name: Installing Homebrew Cask Packages
+  homebrew_cask:
+    name: "{{ brew_cask_packages }}"
+    state: present
+  register: result
+  until: result is successful
+  when: brew_cask_packages is defined and homebrew_check.stat.exists
+
+- name: Installing Homebrew Packages
+  homebrew:
+    name: "{{ brew_packages }}"
+    state: present
+  register: result
+  until: result is successful
+  when: brew_packages is defined and homebrew_check.stat.exists

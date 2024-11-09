@@ -1,0 +1,112 @@
+- name: Disable Ask Siri
+  osx_defaults:
+    domain: com.apple.assistant.support
+    key: "Assistant Enabled"
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - apple
+
+- name: Remove siri icon from status menu
+  osx_defaults:
+    domain: com.apple.Siri
+    key: StatusMenuVisible
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - apple
+
+- name: Prevent Photos from opening automatically when devices are plugged in
+  osx_defaults:
+    domain: com.apple.ImageCapture
+    key: disableHotPlug
+    type: bool
+    value: true
+  tags:
+    - macos
+    - osx_defaults
+    - apple
+
+- name: Prevent Time Machine from prompting to use new hard drives as backup volume
+  osx_defaults:
+    domain: com.apple.TimeMachine
+    key: DoNotOfferNewDisksForBackup
+    type: bool
+    value: true
+  tags:
+    - macos
+    - osx_defaults
+    - apple
+
+- name: Prevent Time Machine from prompting to use new hard drives as backup volume
+  osx_defaults:
+    domain: com.apple.TimeMachine
+    key: DoNotOfferNewDisksForBackup
+    type: bool
+    value: true
+  tags:
+    - macos
+    - osx_defaults
+    - apple
+
+- name: Create screenshots directory
+  shell: mkdir -p ~/Pictures/screenshots
+  tags:
+    - macos
+    - osx_defaults
+    - apple
+
+- name: Set screenshots directory
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: location
+    type: string
+    value: ~/Pictures/screenshots
+  tags:
+    - macos
+    - osx_defaults
+    - apple
+
+- name: Save screenshots as png
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: type
+    type: string
+    value: png
+  tags:
+    - macos
+    - osx_defaults
+    - apple
+
+- name: Disable shadow in screenshots
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: disable-shadow
+    type: bool
+    value: true
+  tags:
+    - macos
+    - osx_defaults
+    - apple
+# # Disable animations when opening and closing windows.
+# defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+
+# # Accelerated playback when adjusting the window size.
+# defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+#
+# # Automatically quit printer app once the print jobs complete
+# defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# # Increase sound quality for Bluetooth headphones/headsets
+# defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+# # Dont rearrange spaces based on recent use
+# defaults write com.apple.dock mru-spaces -bool false
+
+# # Enable bluetooth menu in status bar
+# defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist Bluetooth -int 18
+

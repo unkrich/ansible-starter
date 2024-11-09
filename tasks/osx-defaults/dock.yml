@@ -1,0 +1,117 @@
+- name: Hide dock and set to left-hand side
+  osx_defaults:
+    domain: com.apple.dock
+    key: orientation
+    type: string
+    value: left
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Don't show recent applications in dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Set icon size of Dock items to 30 pixels
+  osx_defaults:
+    domain: com.apple.dock
+    key: tilesize
+    type: int
+    value: 30
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Speed up Mission Control animation
+  osx_defaults:
+    domain: com.apple.dock
+    key: expose-animation-duration
+    type: float
+    value: 0.1
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Automatically hide dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Remove the auto-hiding Dock delay
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide-delay
+    type: float
+    value: 0.0001
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Remove the auto-hiding Dock animation
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide-time-modifier
+    type: float
+    value: 0.0001
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Don't rearrange spaces based on recent use
+  osx_defaults:
+    domain: com.apple.dock
+    key: mru-spaces
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Don't animate app launches
+  osx_defaults:
+    domain: com.apple.dock
+    key: launchanim
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Autohide menubar
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: _HIHideMenuBar
+    type: bool
+    value: true
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Restart Dock
+  shell: killall Dock
+  changed_when: false
+  tags:
+    - finder
+    - macos
+    - osx_defaults

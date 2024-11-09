@@ -1,4 +1,10 @@
+- name: Check that the zshrc exists
+  stat:
+    path: ~/.zshrc
+  register: zsh_exists
+
 - name: Install ZSH
+  when: not zsh_exists.stat.exists
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 - name: Change shell to zsh
@@ -16,6 +22,7 @@
   become: true
 
 - name: Install zsh-autosuggestions
+  when: oh_my_stats.stat.exists == False
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"

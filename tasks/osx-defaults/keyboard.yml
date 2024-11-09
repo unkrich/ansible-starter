@@ -1,0 +1,188 @@
+- name: Disable smart dashes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticDashSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+
+- name: Disable automatic period substitution
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticPeriodSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+
+- name: Disable smart quotes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticQuoteSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+
+- name: Disable automatic spelling correction
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+
+- name: Tab in modals
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleKeyboardUIMode
+    type: int
+    value: 3
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+- name: Update key repeat default initial
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: InitialKeyRepeat
+    type: int
+    value: 10
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+- name: Update key repeat continued
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: KeyRepeat
+    type: int
+    value: 1
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+# Disable automatic period substitution
+- name: Disable automatic period substitution
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticPeriodSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+# Disable smart quotes as they're annoying when typing code
+- name: Disable smart quotes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticQuoteSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+# Disable smart dashes
+- name: Disable smart dashes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticDashSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+- name: Disable automatic capitalization
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticCapitalizationEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+- name: Disable automatic spelling correction
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+# # Remap Caps Lock to CTRL
+# - name: Remap caps lock to CTRL
+#   shell: hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0}]}'
+#   tags:
+#     - macos
+#     - osx_defaults
+#     - keyboard
+#
+# - name: Remap caps lock to left control
+#   shell: hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0}]}'
+#   tags:
+#     - keyboard
+#     - macos
+#     - osx_defaults
+#
+# - name: Create launchagents directory
+#   ansible.builtin.file:
+#     path: ~/Library/launchagents
+#     state: directory
+#   tags:
+#     - keyboard
+#     - macos
+#     - osx_defaults
+#
+# - name: Check if caps lock hidutil plist file exists
+#   stat:
+#     path: ~/Library/LaunchAgents/local.hidutilKeyMapping.plist
+#   register: register_name
+#
+# - name: copy caps lock hidutil plist file
+#   shell: cp ./macos/local.hidutilKeyMapping.plist ~/Library/launchagents/local.hidutilKeyMapping.plist
+#   when:
+#     - not register_name.stat.exists
+#
+# - name: Check if caps lock hidutil sudoer exists
+#   stat:
+#     path: /etc/sudoers.d/hidutil
+#   register: sudoer_file
+#
+# - name: create sudoer file
+#   shell: >
+#     echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which hidutil) | cut -d " " -f 1) $(which hidutil)"
+#   become: true
+#   when:
+#     - not sudoer_file.stat.exists
+#
+# - name: launchctl caps lock hidutil
+#   shell: launchctl load ~/Library/LaunchAgents/local.hidutilKeyMapping.plist
+#   when:
+#     - not register_name.stat.exists

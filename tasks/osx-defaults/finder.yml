@@ -1,0 +1,230 @@
+- name: Show filename extensions
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Show dotfiles
+  osx_defaults:
+    domain: -g
+    key: AppleShowAllFiles
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Show full path in Finder
+  osx_defaults:
+    domain: com.apple.finder
+    key: _FXShowPosixPathInTitle
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Enable quitting Finder via ⌘ + Q
+  osx_defaults:
+    domain: com.apple.finder
+    key: QuitMenuItem
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Show icons for various desktop items
+  osx_defaults:
+    domain: com.apple.finder
+    key: "{{ item.key }}"
+    type: bool
+    value: true
+    state: present
+  loop:
+    - { key: ShowExternalHardDrivesOnDesktop }
+    - { key: ShowHardDrivesOnDesktop }
+    - { key: ShowMountedServersOnDesktop }
+    - { key: ShowRemovableMediaOnDesktop }
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Disable file extension change warning
+  osx_defaults:
+    domain: com.apple.finder
+    key: FXEnableExtensionChangeWarning
+    type: bool
+    value: false
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Avoid creating .DS_Store files on network volumes
+  osx_defaults:
+    domain: com.apple.desktopservices
+    key: DSDontWriteNetworkStores
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Avoid creating .DS_Store files on USB volumes
+  osx_defaults:
+    domain: com.apple.desktopservices
+    key: DSDontWriteUSBStores
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Automatically open new Finder window when volume is mounted
+  osx_defaults:
+    domain: com.apple.frameworks.diskimages
+    key: "{{ item.key }}"
+    type: bool
+    value: true
+    state: present
+  loop:
+    - { key: auto-open-ro-root }
+    - { key: auto-open-rw-root }
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Open window for new removable disk
+  osx_defaults:
+    domain: com.apple.finder
+    key: OpenWindowForNewRemovableDisk
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Set default Finder view style to list view
+  osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    value: "Nlsv"
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Disable "Are you sure you want to open this application?" dialog
+  osx_defaults:
+    domain: com.apple.LaunchServices
+    key: LSQuarantine
+    type: bool
+    value: false
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Disable animations when opening and closing windows
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticWindowAnimationsEnabled
+    type: bool
+    value: false
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Accelerated playback when adjusting the window size
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSWindowResizeTime
+    type: float
+    value: 0.001
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Expand save and print panel by default 1/4
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Expand save and print panel by default 2/4
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode2
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Expand save and print panel by default 3/4
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: PNPrintingExpandedStateForPrint
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Expand save and print panel by default 4/4
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: PNPrintingExpandedStateForPrint2
+    type: bool
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Restart Finder
+  shell: killall Finder
+  changed_when: false
+  tags:
+    - finder
+    - macos
+    - osx_defaults

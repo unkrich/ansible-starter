@@ -1,0 +1,49 @@
+- name: Set Spotlight search categories
+  osx_defaults:
+    domain: com.apple.spotlight
+    key: orderedItems
+    value:
+      - '{"enabled" = 1;"name" = "APPLICATIONS";}'
+      - '{"enabled" = 1;"name" = "SYSTEM_PREFS";}'
+      - '{"enabled" = 1;"name" = "DIRECTORIES";}'
+      - '{"enabled" = 1;"name" = "PDF";}'
+      - '{"enabled" = 1;"name" = "FONTS";}'
+      - '{"enabled" = 0;"name" = "DOCUMENTS";}'
+      - '{"enabled" = 0;"name" = "MESSAGES";}'
+      - '{"enabled" = 0;"name" = "CONTACT";}'
+      - '{"enabled" = 0;"name" = "EVENT_TODO";}'
+      - '{"enabled" = 0;"name" = "IMAGES";}'
+      - '{"enabled" = 0;"name" = "BOOKMARKS";}'
+      - '{"enabled" = 0;"name" = "MUSIC";}'
+      - '{"enabled" = 0;"name" = "MOVIES";}'
+      - '{"enabled" = 0;"name" = "PRESENTATIONS";}'
+      - '{"enabled" = 0;"name" = "SPREADSHEETS";}'
+      - '{"enabled" = 0;"name" = "SOURCE";}'
+      - '{"enabled" = 0;"name" = "MENU_DEFINITION";}'
+      - '{"enabled" = 0;"name" = "MENU_OTHER";}'
+      - '{"enabled" = 0;"name" = "MENU_CONVERSION";}'
+      - '{"enabled" = 0;"name" = "MENU_EXPRESSION";}'
+      - '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}'
+      - '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - spotlight
+    - macos
+    - osx_defaults
+
+- name: Enable indexing for the main volume
+  command: "sudo mdutil -i on /"
+  become: true
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - spotlight
+    - macos
+    - osx_defaults
+
+- name: Rebuild Spotlight index
+  command: "sudo mdutil -E /"
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - spotlight
+    - macos
+    - osx_defaults
