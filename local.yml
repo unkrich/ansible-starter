@@ -1,0 +1,5 @@
+- hosts: localhost
+  vars:
+    personal: "{{ lookup('env', 'HOME') }}/Developer/unkrich"
+  tasks:
+    - include: tasks/zsh-setup.yml

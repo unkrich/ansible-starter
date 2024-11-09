@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+xcode-select --install
+sudo xcodebuild -license
+
+pip3 install --ignore-installed ansible
+echo "export PATH=\"`python3 -m site --user-base`/bin:\$PATH\"" >> ~/.bashrc
+source ~/.bashrc
+
+git clone https://github.com/unkrich/ansible-starter ~/ansible-starter
+cd ~/ansible-starter
+
+ansible-playbook local.yml --ask-become-pass

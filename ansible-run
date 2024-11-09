@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+## Install ansible
+pip3 install --ignore-installed ansible
+
+## pull ansible
+sudo ansible-pull -U https://github.com/unkrich/ansible.git
