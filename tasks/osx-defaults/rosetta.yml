@@ -1,0 +1,7 @@
+- name: Install Rosetta
+  command: "sudo softwareupdate --install-rosetta"
+  become: true
+  tags:
+    - macos
+    - osx_defaults
+    - apple

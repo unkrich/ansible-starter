@@ -1,0 +1,3 @@
+- Set defaultbrowser
+- Auto login to aws cli
+- Auto login to doppler cli

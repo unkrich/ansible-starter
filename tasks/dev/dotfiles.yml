@@ -1,0 +1,39 @@
+- name: Installing stow
+  homebrew:
+    name: stow
+    state: present
+  tags:
+    - install
+    - dotfiles
+    - stow
+
+# - name: Cloning .dotfiles
+#   ansible.builtin.git:
+#     repo: "git@github.com:unkrich/dotfiles.git"
+#     dest: "{{ lookup('env', 'HOME') }}/Developer/unkrich/dotfiles"
+#     recursive: yes
+#     update: yes
+#     accept_hostkey: yes
+#     version: main
+#   tags:
+#     - install
+#     - dotfiles
+#     - stow
+
+- name: Get Packer
+  ansible.builtin.git:
+    repo: "https://github.com/wbthomason/packer.nvim"
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  tags:
+    - install
+    - dotfiles
+    - packer
+
+# TODO: Delete pre-existing dotfiles, .zshrc, .zprofile, etc.
+
+- name: Stow dotfiles
+  shell: "cd {{ personal }}/dotfiles && ./macos"
+  tags:
+    - install
+    - dotfiles
+    - stow

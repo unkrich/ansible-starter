@@ -9,53 +9,129 @@
       - unkrich
       - superpowerdotcom
     brew_cask_packages:
-      - arc
+      dev:
+        # - adoptopenjdk
+        - alacritty
+        - docker
+        - font-meslo-lg-nerd-font
+        - pgadmin4
+        - postman
+        - sf-symbols
+        - tailscale
+      personal:
+        - 1password
+        - arc
+        # - cron
+        - discord
+        - google-chrome
+        - hammerspoon
+        - hazel
+        - karabiner-elements
+        - ledger-live
+        - linear-linear
+        - notion
+        - openscad
+        - qbittorrent
+        - slack
+        - superhuman
+        - ultimaker-cura
+        - zoom
     brew_packages:
-      - direnv
+      dev:
+        - autoconf
+        - awscli
+        - chruby
+        - direnv
+        # - docker-compose
+        - docker-machine
+        - dopplerhq/cli/doppler
+        - eslint
+        # - fzf
+        - fzy
+        - gh
+        - helm
+        - jq
+        - kompose
+        - kops
+        - kubectl
+        - k9s
+        - lua-language-server
+        - minikube
+        - neovim
+        - node
+        - n
+        - postgresql@14
+        # - powerlevel10k
+        - prettier
+        - prettierd
+        - protobuf
+        - pyright
+        - ripgrep
+        - ruby-install
+        - rust-analyzer
+        - stow
+        - temporal
+        - temporalio/brew/tcld
+        - terraform
+        - thefuck
+        - tmux
+        # - ts-node
+        - typescript
+        - typescript-language-server
+        - tree
+        - virtualenv
+        - withgraphite/tap/graphite
+        - yarn
+        # - zsh-syntax-higlighting
+      personal:
+        - defaultbrowser
+        # - gmailctl
+        - koekeishiya/formulae/skhd
+        - koekeishiya/formulae/yabai
     dockitems_to_persist:
+      - name: Arc
+        path: "/Applications/Arc.app"
+        pos: 1
       - name: Messages
         path: "/Applications/Messages.app"
-        pos: 1
-      # - name: Arc
-      #   path: "/Applications/Arc.app"
-      #   pos: 1
-      # - name: Messages
-      #   path: "/Applications/Messages.app"
-      #   pos: 2
-      # - name: Slack
-      #   path: "/Applications/Slack.app"
-      #   pos: 3
-      # - name: Discord
-      #   path: "/Applications/Discord.app"
-      #   pos: 4
+        pos: 2
+      - name: Slack
+        path: "/Applications/Slack.app"
+        pos: 3
+      - name: Discord
+        path: "/Applications/Discord.app"
+        pos: 4
       # - name: Notion Calendar
       #   path: "/Applications/Notion\ Calendar.app"
       #   pos: 5
-      # - name: Superhuman
-      #   path: "/Applications/Superhuman.app"
-      #   pos: 6
-      # - name: Notion
-      #   path: "/Applications/Notion.app"
-      #   pos: 7
-      # - name: Linear
-      #   path: "/Applications/Linear.app"
-      #   pos: 8
-      # - name: iTerm
-      #   path: "/Applications/iTerm.app"
-      #   pos: 9
-      # - name: System Settings
-      #   path: "/Applications/System Settings.app"
-      #   pos: 10
+      - name: Superhuman
+        path: "/Applications/Superhuman.app"
+        pos: 6
+      - name: Notion
+        path: "/Applications/Notion.app"
+        pos: 7
+      - name: Linear
+        path: "/Applications/Linear.app"
+        pos: 8
+      - name: Alacritty
+        path: "/Applications/Alacritty.app"
+        pos: 9
+      - name: System Settings
+        path: "/Applications/System Settings.app"
+        pos: 10
     install_homebrew_if_missing: true
     upgrade_homebrew_packages: false
   tasks:
-    - include: tasks/dev/zsh.yml
-    - include: tasks/dev/ssh.yml
-    - include: tasks/dev/git.yml
-    - include: tasks/brew-setup.yml
+    - include: tasks/brew.yml
     - include: tasks/osx-defaults/core.yml
+    # - include: tasks/osx-defaults/rosetta.yml
     - include: tasks/osx-defaults/dock.yml
     - include: tasks/osx-defaults/finder.yml
     - include: tasks/osx-defaults/keyboard.yml
     - include: tasks/osx-defaults/spotlight.yml
     - include: tasks/osx-defaults/dockutil.yml
+    - include: tasks/dev/zsh.yml
+    - include: tasks/dev/ssh.yml
+    - include: tasks/dev/git.yml
+    - include: tasks/dev/packages.yml
+    - include: tasks/dev/languages.yml
