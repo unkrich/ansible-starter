@@ -13,6 +13,7 @@
         - alacritty
         - docker
         - font-meslo-lg-nerd-font
+        - font-hack-nerd-font
         - pgadmin4
         - postman
         - sf-symbols
@@ -60,7 +61,6 @@
         - node
         - n
         - postgresql@14
-        # - powerlevel10k
         - prettier
         - prettierd
         - protobuf
