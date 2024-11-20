@@ -32,7 +32,7 @@
 # TODO: Delete pre-existing dotfiles, .zshrc, .zprofile, etc.
 
 - name: Stow dotfiles
-  shell: "cd {{ personal }}/dotfiles && ./macos"
+  shell: "cd {{ lookup('env', 'HOME') }}/Developer/unkrich/dotfiles && ./macos"
   tags:
     - install
     - dotfiles

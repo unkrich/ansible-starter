@@ -26,3 +26,7 @@
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
+
+- name: Install powerlevel10k
+  shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/custom/powerlevel10k
+  when: oh_my_stats.stat.exists == False

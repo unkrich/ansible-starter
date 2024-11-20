@@ -4,7 +4,6 @@
   vars:
     source_key: "./.ssh/id_rsa"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
-    personal: "{{ lookup('env', 'HOME') }}/Developer/{{ lookup('env', 'USER') }}"
     github_orgs:
       - unkrich
       - superpowerdotcom
@@ -122,16 +121,17 @@
     install_homebrew_if_missing: true
     upgrade_homebrew_packages: false
   tasks:
-    - include: tasks/brew.yml
-    - include: tasks/osx-defaults/core.yml
-    # - include: tasks/osx-defaults/rosetta.yml
-    - include: tasks/osx-defaults/dock.yml
-    - include: tasks/osx-defaults/finder.yml
-    - include: tasks/osx-defaults/keyboard.yml
-    - include: tasks/osx-defaults/spotlight.yml
-    - include: tasks/osx-defaults/dockutil.yml
+    # - include: tasks/brew.yml
+    # - include: tasks/osx-defaults/core.yml
+    # # - include: tasks/osx-defaults/rosetta.yml
+    # - include: tasks/osx-defaults/dock.yml
+    # - include: tasks/osx-defaults/finder.yml
+    # - include: tasks/osx-defaults/keyboard.yml
+    # - include: tasks/osx-defaults/spotlight.yml
+    # - include: tasks/osx-defaults/dockutil.yml
     - include: tasks/dev/zsh.yml
-    - include: tasks/dev/ssh.yml
-    - include: tasks/dev/git.yml
-    - include: tasks/dev/packages.yml
-    - include: tasks/dev/languages.yml
+    # - include: tasks/dev/ssh.yml
+    # - include: tasks/dev/git.yml
+    # - include: tasks/dev/packages.yml
+    # - include: tasks/dev/languages.yml
+    - include: tasks/dev/dotfiles.yml
